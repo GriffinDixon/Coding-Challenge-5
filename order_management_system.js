@@ -73,4 +73,21 @@ function completeOrder(customerName) {
         console.log(`Error: No order found for customer ${customerName}.`);
     }}
 
+// Task 6: Function to check and log pending orders
+function checkPendingOrders() {
+    const pendingOrders = orders.filter(order => order.status === 'Pending');
+    
+    if (pendingOrders.length > 0) {
+        pendingOrders.forEach(order => {
+            console.log(`Pending Order for ${order.customerName}:`);
+            order.items.forEach(item => {
+                console.log(`- ${item.name}: ${item.quantity}`);
+            });
+            console.log(`Status: ${order.status}\n`);
+        });
+    } else {
+        console.log('No pending orders.');
+    }}
+checkPendingOrders(); // This will log details of all pending orders
+
 
