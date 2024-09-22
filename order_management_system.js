@@ -24,3 +24,30 @@ sampleOrders.forEach(order => {
 });
 
 console.log(orders);
+
+
+// Task 3: function to place an order
+function placeOrder(customerName, orderedItems) {
+    // Check if all items have enough stock
+    const isOrderValid = orderedItems.every(item => {
+        const product = inventory.find(p => p.name === item.name);
+        if (!product || product.quantity < item.quantity) {
+            console.log(`Error: Not enough stock for ${item.name}.`);
+            return false;
+        }
+        return true;
+    });
+
+    // If the order is valid, update inventory and add order
+    if (isOrderValid) {
+        orderedItems.forEach(item => {
+            const product = inventory.find(p => p.name === item.name);
+            product.quantity -= item.quantity;
+        });
+
+        // Add new order with status 'Pending'
+        orders[orders.length] = { customerName, items: orderedItems, status: 'Pending' };
+        console.log(`Order placed for ${customerName}.`);
+    }}
+console.log(inventory); // Check updated inventory
+console.log(orders);    // Check placed orders
