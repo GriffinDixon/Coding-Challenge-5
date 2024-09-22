@@ -51,3 +51,13 @@ function placeOrder(customerName, orderedItems) {
     }}
 console.log(inventory); // Check updated inventory
 console.log(orders);    // Check placed orders
+
+// Task 4: Function to calculate total for an order
+function calculateOrderTotal(order) {
+    return order.items.reduce((total, item) => {
+        const product = inventory.find(p => p.name === item.name);
+        if (product) {
+            return total + (product.price * item.quantity); // Calculate the total for this item
+        }
+        return total; // If product not found, return current total
+    }, 0);}
